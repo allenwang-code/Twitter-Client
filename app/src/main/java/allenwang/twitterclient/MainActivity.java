@@ -2,6 +2,7 @@ package allenwang.twitterclient;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.Callback;
@@ -9,12 +10,12 @@ import com.twitter.sdk.android.core.Result;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
 import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.TwitterSession;
-import com.twitter.sdk.android.core.identity.TwitterAuthClient;
 import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 
 import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG  = MainActivity.class.getSimpleName();
     private static String TWITTER_KEY;
     private static String TWITTER_SECRET;
 
@@ -31,10 +32,12 @@ public class MainActivity extends AppCompatActivity {
         Fabric.with(this, new Twitter(authConfig));
 
         loginButton = (TwitterLoginButton) findViewById(R.id.login_button);
+        loginButton.setEnabled(true);
         loginButton.setCallback(new Callback<TwitterSession>() {
             @Override
             public void success(Result<TwitterSession> result) {
-                // Do something with result, which provides a TwitterSession for making API calls
+                Log.d(TAG, String.valueOf(result.data.getUserId()));
+                Log.d(TAG, String.valueOf(result.data.getUserName()));
             }
 
             @Override
@@ -43,6 +46,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        TwitterAuthClient
+
     }
 }

@@ -13,6 +13,7 @@
 
     <com.twitter.sdk.android.core.identity.TwitterLoginButton
         android:id="@+id/login_button"
+        android:enabled="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
