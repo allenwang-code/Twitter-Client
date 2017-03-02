@@ -21,7 +21,7 @@ public class CustomApplication extends Application {
     public void onCreate() {
         super.onCreate();
         TWITTER_KEY = getString(R.string.twitter_api_key);
-        TWITTER_SECRET = getString(R.string.twitter_api_key);
+        TWITTER_SECRET = getString(R.string.twitter_secret);
         TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
         Fabric.with(this, new Twitter(authConfig));
     }
