@@ -10,8 +10,8 @@ import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TWITTER_KEY = "";
-    private static final String TWITTER_SECRET = "";
+    private static String TWITTER_KEY;
+    private static String TWITTER_SECRET;
 
 
     @Override
@@ -19,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        TWITTER_KEY = getString(R.string.twitter_api_key);
+        TWITTER_SECRET = getString(R.string.twitter_api_key);
         TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
         Fabric.with(this, new Twitter(authConfig));
     }

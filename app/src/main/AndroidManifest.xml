@@ -12,7 +12,7 @@
         android:theme="@style/AppTheme" >
         <meta-data
             android:name="io.fabric.ApiKey"
-            android:value="" />
+            android:value="@string/twitter_manifest_api_key" />
 
         <activity android:name=".MainActivity" >
             <intent-filter>
