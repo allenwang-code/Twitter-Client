@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme">
         <meta-data
             android:name="io.fabric.ApiKey"
-            android:value="@string/twitter_manifest_api_key" />
+            android:value="0e20e7e8ebb5b6905634e2aa45ed0496dad3574f" />
 
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -24,7 +24,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ListActivity"></activity>
+        <activity android:name=".ListViewActivity"></activity>
     </application>
 
 </manifest>
