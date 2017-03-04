@@ -3,8 +3,8 @@ package allenwang.twitterclient;
 import android.app.ListActivity;
 import android.os.Bundle;
 
+import com.twitter.sdk.android.tweetui.CollectionTimeline;
 import com.twitter.sdk.android.tweetui.TweetTimelineListAdapter;
-import com.twitter.sdk.android.tweetui.UserTimeline;
 
 public class ListViewActivity extends ListActivity {
 
@@ -12,13 +12,15 @@ public class ListViewActivity extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        final UserTimeline userTimeline = new UserTimeline.Builder().build();
 
-        final TweetTimelineListAdapter adapter = new TweetTimelineListAdapter.Builder(this)
-                .setTimeline(userTimeline)
-                
+        CollectionTimeline timeline = new CollectionTimeline.Builder()
+                .id(836537114044985344L)
                 .build();
 
+        final TweetTimelineListAdapter adapter = new TweetTimelineListAdapter.Builder(this)
+                .setTimeline(timeline)
+                .setViewStyle(R.style.tw__TweetLightWithActionsStyle)
+                .build();
         setListAdapter(adapter);
     }
 }

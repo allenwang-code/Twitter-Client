@@ -21,8 +21,6 @@ public class MainActivity extends AppCompatActivity {
 
     private TwitterLoginButton loginButton;
 
-    private long twitterId;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,12 +33,13 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, String.valueOf(result.data.getUserId()));
                 Log.d(TAG, String.valueOf(result.data.getUserName()));
 
-                twitterId = result.data.getUserId();
+                result.data.getUserId();
                 //showTweet();
-                Intent i = new Intent();
-                i.setClass(MainActivity.this, ListViewActivity.class);
-                startActivity(i);
-                finish();
+
+//                Intent i = new Intent();
+//                i.setClass(MainActivity.this, ListViewActivity.class);
+//                startActivity(i);
+//                finish();
             }
 
             @Override
@@ -63,9 +62,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showTweet() {
+        // TODO: Use a more specific parent
         final ViewGroup parentView = (ViewGroup) getWindow().getDecorView().getRootView();
-
-        TweetUtils.loadTweet(twitterId, new Callback<Tweet>() {
+        // TODO: Base this Tweet ID on some data from elsewhere in your app
+        long tweetId = 631879971628183552L;
+        TweetUtils.loadTweet(tweetId, new Callback<Tweet>() {
             @Override
             public void success(Result<Tweet> result) {
                 TweetView tweetView = new TweetView(MainActivity.this, result.data);
@@ -76,5 +77,6 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("TwitterKit", "Load Tweet failure", exception);
             }
         });
+
     }
 }
