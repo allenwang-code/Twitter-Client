@@ -13,14 +13,14 @@ public class Util {
     private static final String USER_NAME = "USER_NAME";
 
 
-    public static String readId(Context context){
+    public static Long readId(Context context){
         SharedPreferences settings = context.getSharedPreferences(DATA, 0);
-        return settings.getString(USER_ID, "");
+        return settings.getLong(USER_ID, -1);
     }
 
-    public static void saveId(Context context, String id){
+    public static void saveId(Context context, long id){
         SharedPreferences settings = context.getSharedPreferences(DATA, 0);
-        settings.edit().putString(USER_ID, id).apply();
+        settings.edit().putLong(USER_ID, id).apply();
     }
 
     public static String readName(Context context){

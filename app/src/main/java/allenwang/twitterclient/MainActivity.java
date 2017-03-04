@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.ViewGroup;
 
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
@@ -12,9 +11,6 @@ import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.identity.TwitterAuthClient;
 import com.twitter.sdk.android.core.identity.TwitterLoginButton;
-import com.twitter.sdk.android.core.models.Tweet;
-import com.twitter.sdk.android.tweetui.TweetUtils;
-import com.twitter.sdk.android.tweetui.TweetView;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG  = MainActivity.class.getSimpleName();
@@ -33,13 +29,13 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, String.valueOf(result.data.getUserId()));
                 Log.d(TAG, String.valueOf(result.data.getUserName()));
 
-                result.data.getUserId();
-                //showTweet();
+                Util.saveId(MainActivity.this, result.data.getUserId());
+                Util.saveName(MainActivity.this, result.data.getUserName());
 
-//                Intent i = new Intent();
-//                i.setClass(MainActivity.this, ListViewActivity.class);
-//                startActivity(i);
-//                finish();
+                Intent i = new Intent();
+                i.setClass(MainActivity.this, ListViewActivity.class);
+                startActivity(i);
+                finish();
             }
 
             @Override
@@ -59,24 +55,5 @@ public class MainActivity extends AppCompatActivity {
             boolean twitterLoginWasCanceled = (resultCode == RESULT_CANCELED);
             twitterAuthClient.onActivityResult(requestCode, resultCode, data);
         }
-    }
-
-    private void showTweet() {
-        // TODO: Use a more specific parent
-        final ViewGroup parentView = (ViewGroup) getWindow().getDecorView().getRootView();
-        // TODO: Base this Tweet ID on some data from elsewhere in your app
-        long tweetId = 631879971628183552L;
-        TweetUtils.loadTweet(tweetId, new Callback<Tweet>() {
-            @Override
-            public void success(Result<Tweet> result) {
-                TweetView tweetView = new TweetView(MainActivity.this, result.data);
-                parentView.addView(tweetView);
-            }
-            @Override
-            public void failure(TwitterException exception) {
-                Log.d("TwitterKit", "Load Tweet failure", exception);
-            }
-        });
-
     }
 }
