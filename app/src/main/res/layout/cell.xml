@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <TextView
+        android:text="USER_NAME"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/iv_headShot"
+        android:layout_toEndOf="@+id/iv_headShot"
+        android:layout_marginTop="14dp"
+        android:id="@+id/tv_userName" />
+
+    <ImageView
+        android:layout_width="60dp"
+        app:srcCompat="@mipmap/ic_launcher"
+        android:id="@+id/iv_headShot"
+        android:layout_height="60dp"
+        android:layout_alignTop="@+id/tv_userName"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="\@userid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tv_userName"
+        android:id="@+id/tv_userScreenName"
+        android:layout_marginLeft="5dp"
+        android:layout_toLeftOf="@+id/tv_time"
+        android:layout_toRightOf="@+id/tv_userName"
+        android:layout_toEndOf="@+id/tv_userName" />
+
+    <TextView
+        android:text="very very very very very very very very very very very very very veryvery very very very very very very very very very very very very very long content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_userName"
+        android:layout_toRightOf="@+id/iv_headShot"
+        android:layout_toEndOf="@+id/iv_headShot"
+        android:layout_marginTop="10dp"
+        android:id="@+id/tv_body" />
+
+    <TextView
+        android:text="0h 0m"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tv_userScreenName"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/tv_time" />
+
+</RelativeLayout>
