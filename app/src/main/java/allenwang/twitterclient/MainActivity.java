@@ -21,14 +21,28 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setLoginButton();
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // handle cancelled Twitter login (resets TwitterCore.*AuthHandler.AuthState)
+        final TwitterAuthClient twitterAuthClient = new TwitterAuthClient();
+        if(twitterAuthClient.getRequestCode() == requestCode) {
+            boolean twitterLoginWasCanceled = (resultCode == RESULT_CANCELED);
+            twitterAuthClient.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+    private void setLoginButton() {
         loginButton = (TwitterLoginButton) findViewById(R.id.login_button);
         loginButton.setCallback(new Callback<TwitterSession>() {
             @Override
             public void success(Result<TwitterSession> result) {
                 Log.d(TAG, String.valueOf(result.data.getUserId()));
                 Log.d(TAG, String.valueOf(result.data.getUserName()));
-
                 Util.saveId(MainActivity.this, result.data.getUserId());
                 Util.saveName(MainActivity.this, result.data.getUserName());
 
@@ -45,15 +59,4 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        // handle cancelled Twitter login (resets TwitterCore.*AuthHandler.AuthState)
-        final TwitterAuthClient twitterAuthClient = new TwitterAuthClient();
-        if(twitterAuthClient.getRequestCode() == requestCode) {
-            boolean twitterLoginWasCanceled = (resultCode == RESULT_CANCELED);
-            twitterAuthClient.onActivityResult(requestCode, resultCode, data);
-        }
-    }
 }

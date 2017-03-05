@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3f7eb5</color>
-    <color name="colorPrimaryDark">#295586</color>
+    <color name="colorPrimary">@color/tw__blue_default</color>
+    <color name="colorPrimaryDark">@color/tw__blue_pressed</color>
     <color name="colorAccent">#FF4081</color>
 </resources>
