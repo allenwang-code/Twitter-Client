@@ -34,8 +34,10 @@ public class TweetsAdapter extends
         mContext = context;
     }
 
-    public void updateData(List<Tweet> docs){
-        mTweets = docs;
+    public void updateData(List<Tweet> ts){
+        mTweets.clear();
+        mTweets.addAll(ts);
+        this.notifyDataSetChanged();
     }
 
     // Easy access to the context object in the recyclerview

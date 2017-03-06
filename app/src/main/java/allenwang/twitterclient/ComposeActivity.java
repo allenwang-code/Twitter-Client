@@ -43,9 +43,10 @@ public class ComposeActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<Tweet> call, Response<Tweet> response) {
                     Tweet tweet = response.body();
-                    List<Tweet> tweets = new ArrayList<Tweet>();
+
+                    List<Tweet> tweets = new ArrayList<>();
                     tweets.addAll(ListViewActivity.tweets);
-                    tweets.add(tweet);
+                    tweets.add(0, tweet);
 
                     ListViewActivity.tweets = tweets;
 

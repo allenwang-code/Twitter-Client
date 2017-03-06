@@ -30,7 +30,7 @@ public class ListViewActivity extends AppCompatActivity {
     static final int POST_REQUEST_CODE = 100;
     static final String PARCELABLE_NAME = "tweet";
 
-    static List<Tweet> tweets = new ArrayList<Tweet>();
+    static List<Tweet> tweets = new ArrayList<>();
     RecyclerView recyclerView;
     TweetsAdapter adapter;
 
@@ -56,6 +56,7 @@ public class ListViewActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == POST_REQUEST_CODE) {
             if (resultCode != Activity.RESULT_OK) { return; }
+            adapter.updateData(tweets);
             adapter.notifyDataSetChanged();
         }
     }
