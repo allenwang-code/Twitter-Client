@@ -15,19 +15,20 @@
             android:name="io.fabric.ApiKey"
             android:value="0e20e7e8ebb5b6905634e2aa45ed0496dad3574f" />
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".viewpager.ViewPagerActivity">
             <intent-filter>
-                <uses-permission android:name="android.permission.INTERNET" />
-
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".ListViewActivity" />
-        <activity android:name=".ComposeActivity"
-            android:theme="@style/Theme.AppCompat.Dialog"
-            ></activity>
+
+        <activity
+            android:name=".ComposeActivity"
+            android:theme="@style/Theme.AppCompat.Dialog" />
+
+        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>
