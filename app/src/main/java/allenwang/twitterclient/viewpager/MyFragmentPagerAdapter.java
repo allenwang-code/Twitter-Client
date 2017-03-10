@@ -33,6 +33,6 @@ public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return new PageFragment();
+        return PageFragment.newInstance("1", "2");
     }
 }
