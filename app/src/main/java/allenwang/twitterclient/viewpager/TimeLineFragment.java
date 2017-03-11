@@ -27,7 +27,11 @@ import allenwang.twitterclient.recycler_view.TweetsAdapter;
 import retrofit2.Call;
 
 public class TimeLineFragment extends Fragment {
-    static final String PARCELABLE_NAME = "tweet";
+    private static final String CONTENT = "CONTENT";
+    int content = 0;
+
+    static final int TWEET = 0;
+    static final int MENTION = 1;
 
     static List<Tweet> tweets = new ArrayList<>();
     RecyclerView recyclerView;
@@ -35,6 +39,22 @@ public class TimeLineFragment extends Fragment {
 
     public TimeLineFragment() {
         // Required empty public constructor
+    }
+
+    public static TimeLineFragment newInstance(int content) {
+        TimeLineFragment fragment = new TimeLineFragment();
+        Bundle args = new Bundle();
+        args.putInt(CONTENT, content);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            content = getArguments().getInt(CONTENT);
+        }
     }
 
     @Override
@@ -47,7 +67,7 @@ public class TimeLineFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setRecyclerView(view);
-        loadTweets();
+        loadContents();
     }
 
     @Override
@@ -80,11 +100,18 @@ public class TimeLineFragment extends Fragment {
         recyclerView.addOnScrollListener(scrollListener);
     }
 
-    void loadTweets() {
+    void loadContents() {
         TwitterApiClient twitterApiClient = TwitterCore.getInstance().getApiClient();
         // Can also use Twitter directly: Twitter.getApiClient()
         StatusesService statusesService = twitterApiClient.getStatusesService();
-        Call call = statusesService.homeTimeline(200, null, null, null, null, null, null);
+
+        Call call = null;
+        if (content == TWEET) {
+            call = statusesService.homeTimeline(200, null, null, null, null, null, null);
+        } else if (content == MENTION) {
+            call = statusesService.mentionsTimeline(200, null, null, null, null, null);
+        }
+
         call.enqueue(new Callback<List<Tweet>>() {
             @Override
             public void success(Result<List<Tweet>> result) {

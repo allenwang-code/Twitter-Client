@@ -32,10 +32,6 @@ public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        if (position == 0) {
-            return new TimeLineFragment();
-        } else {
-            return new TimeLineFragment();
-        }
+        return TimeLineFragment.newInstance(position);
     }
 }
