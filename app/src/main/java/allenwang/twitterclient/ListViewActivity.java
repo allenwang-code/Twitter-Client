@@ -34,6 +34,7 @@ public class ListViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list);
         loadTweets();
         setRecyclerView();
+
     }
 
     private void setRecyclerView() {
