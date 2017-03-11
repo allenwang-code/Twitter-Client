@@ -12,8 +12,8 @@ import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.identity.TwitterAuthClient;
 import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 
-public class MainActivity extends AppCompatActivity {
-    private static final String TAG  = MainActivity.class.getSimpleName();
+public class LoginActivity extends AppCompatActivity {
+    private static final String TAG  = LoginActivity.class.getSimpleName();
 
     private TwitterLoginButton loginButton;
 
@@ -43,11 +43,11 @@ public class MainActivity extends AppCompatActivity {
             public void success(Result<TwitterSession> result) {
                 Log.d(TAG, String.valueOf(result.data.getUserId()));
                 Log.d(TAG, String.valueOf(result.data.getUserName()));
-                Util.saveId(MainActivity.this, result.data.getUserId());
-                Util.saveName(MainActivity.this, result.data.getUserName());
+                Util.saveId(LoginActivity.this, result.data.getUserId());
+                Util.saveName(LoginActivity.this, result.data.getUserName());
 
                 Intent i = new Intent();
-                i.setClass(MainActivity.this, ListViewActivity.class);
+                i.setClass(LoginActivity.this, ListViewActivity.class);
                 startActivity(i);
                 finish();
             }

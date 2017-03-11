@@ -28,7 +28,7 @@
             android:name=".ComposeActivity"
             android:theme="@style/Theme.AppCompat.Dialog" />
 
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".LoginActivity"></activity>
     </application>
 
 </manifest>
