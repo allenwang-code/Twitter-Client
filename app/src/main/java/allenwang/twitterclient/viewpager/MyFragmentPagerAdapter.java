@@ -12,7 +12,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
     final int PAGE_COUNT = 2;
-    private String tabTitles[] = new String[] { "Tab1", "Tab2"};
+    private String tabTitles[] = new String[] { "TimeLine", "Mention"};
     private Context context;
 
     public MyFragmentPagerAdapter(FragmentManager fm, Context context) {
@@ -27,12 +27,15 @@ public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        // Generate title based on item position
         return tabTitles[position];
     }
 
     @Override
     public Fragment getItem(int position) {
-        return PageFragment.newInstance("1", "2");
+        if (position == 0) {
+            return new TimeLineFragment();
+        } else {
+            return new TimeLineFragment();
+        }
     }
 }
