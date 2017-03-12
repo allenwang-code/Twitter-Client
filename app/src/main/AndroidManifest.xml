@@ -21,14 +21,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".ListViewActivity" />
-
         <activity
             android:name=".ComposeActivity"
             android:theme="@style/Theme.AppCompat.Dialog" />
-
         <activity android:name=".LoginActivity"></activity>
-    </application>
+        <activity android:name=".UserDatailActivity"></activity>
+        <activity android:name=".ListViewActivity" />
 
+    </application>
 </manifest>

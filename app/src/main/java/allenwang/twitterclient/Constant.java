@@ -5,7 +5,7 @@ package allenwang.twitterclient;
  */
 
 public class Constant {
-    public static final String WEB_VIEW_URL = "WEB_VIEW_URL";
+    public static final String KEY_USER_ID = "KEY_USER_ID";
 
 
 

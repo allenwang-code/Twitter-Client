@@ -16,11 +16,11 @@ public class WebViewActivity extends AppCompatActivity {
         webView = (WebView) findViewById(R.id.webView);
         webView.setWebViewClient(new MyWebViewClient());
         webView.getSettings().setJavaScriptEnabled(true);
-        Bundle b = getIntent().getExtras();
-        if (b != null ) {
-            url = b.getString(Constant.WEB_VIEW_URL);
-        }
-        webView.loadUrl(url);
+//        Bundle b = getIntent().getExtras();
+//        if (b != null ) {
+//            url = b.getString(Constant.WEB_VIEW_URL);
+//        }
+//        webView.loadUrl(url);
     }
 
 

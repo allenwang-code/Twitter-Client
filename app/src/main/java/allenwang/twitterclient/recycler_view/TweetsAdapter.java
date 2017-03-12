@@ -1,6 +1,7 @@
 package allenwang.twitterclient.recycler_view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +14,9 @@ import com.twitter.sdk.android.core.models.Tweet;
 
 import java.util.List;
 
+import allenwang.twitterclient.Constant;
 import allenwang.twitterclient.R;
+import allenwang.twitterclient.UserDatailActivity;
 import allenwang.twitterclient.Util;
 
 /**
@@ -61,14 +64,14 @@ public class TweetsAdapter extends
     public void onBindViewHolder(ViewHolder holder, int position) {
         // Get the data model based on position
         final Tweet tweet = mTweets.get(position);
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent i = new Intent(mContext, WebViewActivity.class);
-//                i.putExtra(Constant.WEB_VIEW_URL, tweet.getWebUrl());
-//                mContext.startActivity(i);
-//            }
-//        });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(mContext, UserDatailActivity.class);
+                i.putExtra(Constant.KEY_USER_ID, tweet.getId());
+                mContext.startActivity(i);
+            }
+        });
 
         Glide.with(getContext()).load(tweet.user.profileImageUrlHttps).into(holder.imageView);
         holder.tvBody.setText(tweet.text);
