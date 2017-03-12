@@ -1,12 +1,22 @@
 package allenwang.twitterclient;
 
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.twitter.sdk.android.core.models.User;
+
+import allenwang.twitterclient.http.MyTwitterApiCllient;
+import allenwang.twitterclient.viewpager.TimeLineFragment;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by allenwang on 2017/3/11.
@@ -20,7 +30,7 @@ public class UserDatailActivity extends AppCompatActivity {
     private TextView taglineTextView;
     private TextView followerTextView;
     private TextView followingTextView;
-    private RecyclerView tweetRecyclerView;
+    private RelativeLayout twitterFragmentContainer;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -30,34 +40,43 @@ public class UserDatailActivity extends AppCompatActivity {
         taglineTextView = (TextView) findViewById(R.id.tv_tagline);
         followerTextView = (TextView) findViewById(R.id.tv_followers);
         followingTextView = (TextView) findViewById(R.id.tv_following);
-        tweetRecyclerView = (RecyclerView) findViewById(R.id.tweet_recycler_view);
+        twitterFragmentContainer = (RelativeLayout) findViewById(R.id.tweet_frament_container);
 
         userId = getIntent().getLongExtra(Constant.KEY_USER_ID, 0);
         Toast.makeText(this, String.valueOf(userId), Toast.LENGTH_SHORT).show();
+
+        getUserInfo();
+        getTwiiterFragment();
+    }
+
+    private void getTwiiterFragment() {
+        TimeLineFragment fragment = TimeLineFragment.newInstance(userId, TimeLineFragment.TWEET);
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.tweet_frament_container, fragment, "")
+                .commit();
     }
 
     private void getUserInfo(){
+        MyTwitterApiCllient client = new MyTwitterApiCllient();
+        Call call = client.getUserService().show(userId, null, false);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                User user = response.body();
+                if (user == null) return;
+                Glide.with(UserDatailActivity.this).load(user.profileImageUrl).into(pictureImageView);
+                taglineTextView.setText(user.description);
+                followerTextView.setText("#follower : " +user.followersCount);
+                followingTextView.setText("#following : " +user.friendsCount);
+            }
 
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
 
-//        TwitterApiClient twitterApiClient = TwitterCore.getInstance().getApiClient();
-//        // Can also use Twitter directly: Twitter.getApiClient()
-//        Twitter.getApiClient().
-//
-//                getAccountService().verifyCredentials()
-//        Call call = statusesService.homeTimeline(200, null, null, null, null, null, null);
-//        call.enqueue(new Callback<List<Tweet>>() {
-//            @Override
-//            public void success(Result<List<Tweet>> result) {
-//                tweets = result.data;
-//                adapter.updateData(tweets);
-//                adapter.notifyDataSetChanged();
-//            }
-//
-//            @Override
-//            public void failure(TwitterException exception) {
-//
-//            }
-//        });
+            }
+        });
     }
 
 

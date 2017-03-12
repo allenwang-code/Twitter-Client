@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.twitter.sdk.android.core.TwitterSession;
+
 /**
  * Created by allenwang on 2017/3/9.
  */
@@ -32,6 +34,7 @@ public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return TimeLineFragment.newInstance(position);
+
+        return TimeLineFragment.newInstance(TwitterSession.UNKNOWN_USER_ID, position);
     }
 }

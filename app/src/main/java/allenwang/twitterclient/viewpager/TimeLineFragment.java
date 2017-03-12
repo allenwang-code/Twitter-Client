@@ -27,24 +27,27 @@ import allenwang.twitterclient.recycler_view.TweetsAdapter;
 import retrofit2.Call;
 
 public class TimeLineFragment extends Fragment {
-    private static final String CONTENT = "CONTENT";
-    int content = 0;
+    private static final String CATOGORY = "CATOGORY";
+    private static final String USER_ID = "ID";
+    public static final int TWEET = 0;
+    public static final int MENTION = 1;
 
-    static final int TWEET = 0;
-    static final int MENTION = 1;
+    private int content = 0;
+    private long id = 0;
 
-    static List<Tweet> tweets = new ArrayList<>();
-    RecyclerView recyclerView;
-    TweetsAdapter adapter;
+    private List<Tweet> tweets = new ArrayList<>();
+    private RecyclerView recyclerView;
+    private TweetsAdapter adapter;
 
     public TimeLineFragment() {
         // Required empty public constructor
     }
 
-    public static TimeLineFragment newInstance(int content) {
+    public static TimeLineFragment newInstance(long id, int content) {
         TimeLineFragment fragment = new TimeLineFragment();
         Bundle args = new Bundle();
-        args.putInt(CONTENT, content);
+        args.putLong(USER_ID, id);
+        args.putInt(CATOGORY, content);
         fragment.setArguments(args);
         return fragment;
     }
@@ -53,7 +56,8 @@ public class TimeLineFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            content = getArguments().getInt(CONTENT);
+            content = getArguments().getInt(CATOGORY);
+            id = getArguments().getLong(USER_ID);
         }
     }
 
@@ -107,7 +111,11 @@ public class TimeLineFragment extends Fragment {
 
         Call call = null;
         if (content == TWEET) {
-            call = statusesService.homeTimeline(200, null, null, null, null, null, null);
+            if (id == -1) {
+                call = statusesService.homeTimeline(200, null, null, null, null, null, null);
+            } else {
+                call = statusesService.userTimeline(id, null, 200, null, null, null, null, null, null);
+            }
         } else if (content == MENTION) {
             call = statusesService.mentionsTimeline(200, null, null, null, null, null);
         }

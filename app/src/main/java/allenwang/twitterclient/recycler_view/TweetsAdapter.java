@@ -68,7 +68,7 @@ public class TweetsAdapter extends
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(mContext, UserDatailActivity.class);
-                i.putExtra(Constant.KEY_USER_ID, tweet.getId());
+                i.putExtra(Constant.KEY_USER_ID, tweet.user.getId());
                 mContext.startActivity(i);
             }
         });
