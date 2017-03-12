@@ -15,7 +15,7 @@
             android:name="io.fabric.ApiKey"
             android:value="0e20e7e8ebb5b6905634e2aa45ed0496dad3574f" />
 
-        <activity android:name=".viewpager.ViewPagerActivity">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -24,8 +24,8 @@
         <activity
             android:name=".ComposeActivity"
             android:theme="@style/Theme.AppCompat.Dialog" />
-        <activity android:name=".LoginActivity"></activity>
-        <activity android:name=".UserDatailActivity"></activity>
+        <activity android:name=".viewpager.ViewPagerActivity" />
+        <activity android:name=".UserDatailActivity" />
         <activity android:name=".ListViewActivity" />
 
     </application>

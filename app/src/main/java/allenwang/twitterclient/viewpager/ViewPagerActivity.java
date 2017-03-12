@@ -11,7 +11,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import allenwang.twitterclient.ComposeActivity;
+import allenwang.twitterclient.Constant;
 import allenwang.twitterclient.R;
+import allenwang.twitterclient.UserDatailActivity;
+import allenwang.twitterclient.Util;
 
 public class ViewPagerActivity extends AppCompatActivity {
     static final int POST_REQUEST_CODE = 100;
@@ -30,13 +33,7 @@ public class ViewPagerActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-        // Iterate over all tabs and set the custom view
-//        for (int i = 0; i < tabLayout.getTabCount(); i++) {
-//            TabLayout.Tab tab = tabLayout.getTabAt(i);
-            //tab.setCustomView(pagerAdapter.getTabView(i));
-//        }
         setToolBarItem();
-
     }
 
     @Override
@@ -44,8 +41,7 @@ public class ViewPagerActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == POST_REQUEST_CODE) {
             if (resultCode != Activity.RESULT_OK) { return; }
-            //adapter.updateData(tweets);
-            //adapter.notifyDataSetChanged();
+
         }
     }
 
@@ -72,6 +68,11 @@ public class ViewPagerActivity extends AppCompatActivity {
                     i.setClass(ViewPagerActivity.this, ComposeActivity.class);
                     startActivityForResult(i, POST_REQUEST_CODE);
                     break;
+                case R.id.personal:
+                    Intent pi = new Intent();
+                    pi.setClass(ViewPagerActivity.this, UserDatailActivity.class);
+                    pi.putExtra(Constant.KEY_USER_ID, Util.readId(ViewPagerActivity.this));
+                    startActivity(pi);
             }
             return true;
         }

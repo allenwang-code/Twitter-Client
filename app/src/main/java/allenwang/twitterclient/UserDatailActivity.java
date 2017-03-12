@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.models.User;
 
 import allenwang.twitterclient.http.MyTwitterApiCllient;
@@ -42,7 +43,7 @@ public class UserDatailActivity extends AppCompatActivity {
         followingTextView = (TextView) findViewById(R.id.tv_following);
         twitterFragmentContainer = (RelativeLayout) findViewById(R.id.tweet_frament_container);
 
-        userId = getIntent().getLongExtra(Constant.KEY_USER_ID, 0);
+        userId = getIntent().getLongExtra(Constant.KEY_USER_ID, TwitterSession.UNKNOWN_USER_ID);
         Toast.makeText(this, String.valueOf(userId), Toast.LENGTH_SHORT).show();
 
         getUserInfo();

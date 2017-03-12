@@ -12,6 +12,8 @@ import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.identity.TwitterAuthClient;
 import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 
+import allenwang.twitterclient.viewpager.ViewPagerActivity;
+
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG  = LoginActivity.class.getSimpleName();
 
@@ -43,11 +45,12 @@ public class LoginActivity extends AppCompatActivity {
             public void success(Result<TwitterSession> result) {
                 Log.d(TAG, String.valueOf(result.data.getUserId()));
                 Log.d(TAG, String.valueOf(result.data.getUserName()));
+
                 Util.saveId(LoginActivity.this, result.data.getUserId());
                 Util.saveName(LoginActivity.this, result.data.getUserName());
 
                 Intent i = new Intent();
-                i.setClass(LoginActivity.this, ListViewActivity.class);
+                i.setClass(LoginActivity.this, ViewPagerActivity.class);
                 startActivity(i);
                 finish();
             }
