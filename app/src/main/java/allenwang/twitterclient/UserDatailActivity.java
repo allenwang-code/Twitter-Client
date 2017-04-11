@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.twitter.sdk.android.core.TwitterSession;
@@ -44,7 +43,7 @@ public class UserDatailActivity extends AppCompatActivity {
         twitterFragmentContainer = (RelativeLayout) findViewById(R.id.tweet_frament_container);
 
         userId = getIntent().getLongExtra(Constant.KEY_USER_ID, TwitterSession.UNKNOWN_USER_ID);
-        Toast.makeText(this, String.valueOf(userId), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, String.valueOf(userId), Toast.LENGTH_SHORT).show();
 
         getUserInfo();
         getTwiiterFragment();
